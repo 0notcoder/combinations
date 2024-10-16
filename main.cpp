@@ -35,16 +35,19 @@ std::vector<std::vector<int>> getCombinations(const int &size){
     int numberOfCombinations = 1;
     std::vector<std::vector<int>> combinations;
     if (size == 0) return combinations;
-    combinations.push_back(std::vector<int>(1, 0));
     while (numberOfCombinations <= size){
-        std::vector<int> indexes(numberOfCombinations, 0);
-        while (getIndexes(indexes, size)){
+        std::vector<int> indexes;
+        for (int i = 0; i < numberOfCombinations; i++){
+            indexes.push_back(i);
+        }
+        do {
             std::vector<int> combination;
             for (int i = 0; i < numberOfCombinations; i++){
                 combination.push_back(indexes[i]);
             }
             combinations.push_back(combination);
         }
+        while (getIndexes(indexes, size));
         numberOfCombinations++;
     }
     return combinations;
